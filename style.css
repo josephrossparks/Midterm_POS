@@ -1,0 +1,30 @@
+/*CSS PROPERTY RESET*/
+p, div, body {
+	margin: 0;
+}
+
+p, input, div, form {
+	box-sizing: border-box;
+}
+
+/*Page Styling*/
+
+body {
+	background-color: lightgrey;
+}
+
+/*Style Item Container*/
+#shopPage {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+
+}
+
+.itemContainer {
+	background-color: white;
+	width: 300px;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px;
+}
