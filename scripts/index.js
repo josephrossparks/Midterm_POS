@@ -145,7 +145,7 @@ $(".itemContainer").on("click", function(event) {
 
     numberOfItemsInCart++;//Add one to number of items in cart
     shoppingCartRunningTotal = shoppingCartRunningTotal + addToCart.price;//Add price of selected item to running shopping cart total
-    $("#displayItemTotal").text("$" + shoppingCartRunningTotal);
+    $("#displayItemTotal").text("$" + shoppingCartRunningTotal.toFixed(2));
 
     console.log(numberOfItemsInCart);
     console.log(shoppingCartRunningTotal);
@@ -156,9 +156,27 @@ $("#viewCartButton").on("click", checkoutPage);//Upon clicking the view cart / c
 
 function checkoutPage() {
 	
-	$(".checkoutPage").css("display", "block");//Display checkoutPage DIV (defaulted to display: none)
-	//NOTE: Presumably here we will want to add super-cool transition functionality.
-	listItems(shoppingCart); //Run the list items function on the current shopping cart array, adding them to the checkout page
+    $("#checkoutContainer").css("display", "block");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
+
+    //NOTE: Presumably here we will want to add super-cool transition functionality for the cart page 
+	
+    listItems(shoppingCart); //Run the list items function on the current shopping cart array, adding them to the checkout page
+
+    $("#returnToShopPage").on("click", function () {
+
+        $("#checkoutContainer").css("display", "none");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
+
+        $("#shoppingCart").html("");
+        $("#ShoppingCartTotals").html("");
+
+    });
+
+    $("#makePayment").on("click", function () {
+        
+        $("#cartPage").css("display", "none");//Cart page goes away.  Transitions pending.
+        $("#cashOrCredit").css("display", "block");//Payment sequence continues on to cash or credit page.
+        
+    });
 
 }
 
@@ -186,9 +204,9 @@ function listItems(cartObject) {
 	var taxAdded = cartSubTotal * salesTax;//Calculate added tax for order
 	cartGrandTotal = cartSubTotal + taxAdded; //Grand total is sub-total including tax
 
-	let subTotalPTag = $("<p>Sub Total: $" + cartSubTotal + "</p>");//Create sub-total HTML
-	let salesTaxPTag = $("<p>Tax: $" + taxAdded + "</p>");//Create sales tax HTML
-	let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal + "</p>");//Create grand total HTML
+	let subTotalPTag = $("<p>Sub Total: $" + cartSubTotal.toFixed(2) + "</p>");//Create sub-total HTML
+	let salesTaxPTag = $("<p>Tax: $" + taxAdded.toFixed(2) + "</p>");//Create sales tax HTML
+	let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal.toFixed(2) + "</p>");//Create grand total HTML
 
 	$("#shoppingCartTotals").append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
 
