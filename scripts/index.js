@@ -134,15 +134,12 @@ $(".itemContainer").on("click", function(event) {
     	}
 	return null;
     }
-    	
-    /*	
-    pos = shoppingCart.length;//Determine number of objects in shopping cart array
-    shoppingCart[pos] = addToCart;//Drop selected item into next empty slot in shopping cart array (remember that the first position is zero, the second is one, and so forth)
-	*/
 
 	shoppingCart.push(addToCart);
 
 	console.log(shoppingCart);
+
+    // NOTE:  Need to change shoppingCartRunningTotal to include tax.
 
     numberOfItemsInCart++;//Add one to number of items in cart
     shoppingCartRunningTotal = shoppingCartRunningTotal + addToCart.price;//Add price of selected item to running shopping cart total
@@ -168,17 +165,54 @@ function checkoutPage() {
         $("#checkoutContainer").css("display", "none");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
 
         $("#shoppingCart").html("");
-        $("#ShoppingCartTotals").html("");
+        $("#shoppingCartTotals").html("");
 
     });
 
-    $("#makePayment").on("click", function () {
+    $("#goToPaymentPage").on("click", function () {
         
         $("#cartPage").css("display", "none");//Cart page goes away.  Transitions pending.
         $("#cashOrCredit").css("display", "block");//Payment sequence continues on to cash or credit page.
         
     });
+
 }
+
+// The following two on-click event handlers deal with the cash or credit submission buttons.
+
+$("#selectCash").on("click", function () {
+    $("#cashOrCredit").css("display", "none");//Cash or credit "page" goes away.  Transitions pending.
+    $("#cashTransaction").css("display", "block");//Payment sequence continues on to cash payment page.     
+});
+
+$("#selectCard").on("click", function () {
+    $("#cashOrCredit").css("display", "none");//Cash or credit "page" goes away.  Transitions pending.
+    $("#cardTransaction").css("display", "block");//Payment sequence continues on to card payment page.     
+});
+
+
+$("#submitCashAmount").on("click", function () {
+
+    let totalCashReceived = $("#cashReceived").val();
+    let changeAmount = totalCashReceived - cartGrandTotal;
+
+    // Add functionality which verifies that the total cash entered is at least equal to the sub-total.
+
+    console.log(totalCashReceived);
+    console.log(changeAmount);
+
+    let cashReceivedPTag = $("<p>Cash Received: $" + totalCashReceived + "</p>");
+    let cartGrandTotalPTag = $("<p>Total Purchase: $" + cartGrandTotal.toFixed(2) + "</p>");
+    let changeAmountPTag = $("<p>Change: $" + changeAmount.toFixed(2) + "</p>");
+
+    console.log(totalCashReceived);
+    console.log(cartGrandTotalPTag);
+    console.log(changeAmountPTag);
+
+
+    $("#displayChangeAmount").append(cashReceivedPTag).append(cartGrandTotalPTag).append(changeAmountPTag);
+
+});
 
 // The following function adds the shopping cart to the checkout page and displays the totals.
 
@@ -209,6 +243,7 @@ function listItems(cartObject) {
 	let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal.toFixed(2) + "</p>");//Create grand total HTML
 
 	$("#shoppingCartTotals").append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
+
 }
 
 })();
