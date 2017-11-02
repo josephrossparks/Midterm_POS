@@ -93,7 +93,7 @@ var shoppingCartRunningTotal = 0; //Initializing shopping cart running dollar to
 var cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment pages
 
 //This function prints all the items to the shop page.
- masterItemList.forEach(function(item){
+masterItemList.forEach(function(item){
 	printItemToShopPage(item);
 });
 
@@ -114,6 +114,7 @@ function printItemToShopPage(item) {//Updated all "var" declarations to "let", s
 
 	$("#shopPage").append(itemContainer);//puts container in the DOM
 }
+
 
 //The following function triggers the addition of a selected item to the shopping cart.
 $(".itemContainer").on("click", function(event) {

@@ -31,13 +31,36 @@
         </div>
       </div>
 
-      <div id="cashOrCredit"></div>
 
-      <div id="cashTransaction"></div>
+      <div id="cashOrCredit">
+        <h3 id="selectCash">Cash</h3>
+        <p>or</p>
+        <h3 id="selectCard">Card</h3>
+      </div>
 
-      <div id="creditTransaction"></div>
 
-      <div id="receiptDisplay"></div>
+      <div id="cashTransaction">
+        <h3>Enter Cash Recieved</h3>
+        <input type="text" id="cashReceived" placeholder="$0.00">
+        <button id="submitCashAmount">Enter</button>
+        <div id="displayChangeAmount"></div>
+        <h4 id="cashToRecipt">Continue</h4>
+      </div>
+
+
+      <div id="creditTransaction">
+        <h3>Enter Card Details</h3>
+        <input type="text" id="cardNumber" placeholder="00000000000000000">
+        <input type="text" id="cardExpiration" placeholder="MMYY">
+        <input type="text" id="cardCVV" placeholder="CVV">
+        <button id="verifyCardDetails">Pay</button>
+      </div>
+
+      <div id="receiptDisplay">
+        <h3>Thank You!</h3>
+        <div id="transactionReceipt"></div>
+        <span>Finish</span>
+      </div>
 
     </div> <!--End of checkoutContainter-->
 
