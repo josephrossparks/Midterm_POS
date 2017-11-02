@@ -138,6 +138,8 @@ $(".itemContainer").on("click", function(event) {
 
 	console.log(shoppingCart);
 
+    // NOTE:  Need to change shoppingCartRunningTotal to include tax.
+
     numberOfItemsInCart++;//Add one to number of items in cart
     shoppingCartRunningTotal = shoppingCartRunningTotal + addToCart.price;//Add price of selected item to running shopping cart total
     $("#displayItemTotal").text("$" + shoppingCartRunningTotal.toFixed(2));
@@ -190,12 +192,22 @@ $("#selectCard").on("click", function () {
 
 $("#submitCashAmount").on("click", function () {
 
-    let cashReceived = $("#cashReceived").val();
-    let changeAmount = cashReceived - cartGrandTotal;
+    let totalCashReceived = $("#cashReceived").val();
+    let changeAmount = totalCashReceived - cartGrandTotal;
 
-    let cashReceivedPTag = $("<p>$" + cashReceived.toFixed(2) + "</p>");
-    let cartGrandTotalPTag = $("<p>$" + cartGrandTotal.toFixed(2) + "</p>");
-    let changeAmountPTag = $("<p>$" + changeAmount.toFixed(2) + "</p>");
+    // Add functionality which verifies that the total cash entered is at least equal to the sub-total.
+
+    console.log(totalCashReceived);
+    console.log(changeAmount);
+
+    let cashReceivedPTag = $("<p>Cash Received: $" + totalCashReceived + "</p>");
+    let cartGrandTotalPTag = $("<p>Total Purchase: $" + cartGrandTotal.toFixed(2) + "</p>");
+    let changeAmountPTag = $("<p>Change: $" + changeAmount.toFixed(2) + "</p>");
+
+    console.log(totalCashReceived);
+    console.log(cartGrandTotalPTag);
+    console.log(changeAmountPTag);
+
 
     $("#displayChangeAmount").append(cashReceivedPTag).append(cartGrandTotalPTag).append(changeAmountPTag);
 
@@ -218,8 +230,7 @@ function listItems(cartObject) {
 
 		$("#shoppingCart").append(lineItemContainer);//place item container in the DOM
 
-        let itemPriceWithTax = item.price * salesTax;
-		cartSubTotal = cartSubTotal + itemPriceWithTax;//Add to cart sub-total
+		cartSubTotal = cartSubTotal + item.price;//Add to cart sub-total
 
 	});
 
