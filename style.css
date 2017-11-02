@@ -7,24 +7,50 @@ p, input, div, form {
 	box-sizing: border-box;
 }
 
+/*Load Fonts*/
+
 /*Page Styling*/
 
 body {
-	background-color: lightgrey;
+	background-color: white;
 }
 
 /*Style Item Container*/
 #shopPage {
+	position: relative;
+	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 
 }
 
 .itemContainer {
-	background-color: white;
 	width: 300px;
+	padding: 15px;
+	margin: 10px 10px;
+
+	background-color: white;
 	border-radius: 5px;
-	padding: 10px;
-	margin: 5px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.itemContainer:hover {
+	background-color: #f4f4f4;
+}
+
+.itemContainer h4 {
+
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9em;
+	color: #FF6100;
+	margin: 5px 0;
+}
+
+.itemContainer p {
+
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.75em;
+	color: #494949;
+	margin: 5px 0;
 }

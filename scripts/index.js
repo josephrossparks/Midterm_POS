@@ -2,100 +2,90 @@
 
 //Master Item Array
 var masterItemList = [
-	{
-		name: 'Grape Juice',
-		price: 4,
-		class: 'juice',
-		description: 'The purest juice from delicious grapes.',
-		itemNumber: 1
-	},
-	{
-		name: 'Apple Juice',
-		price: 3,
-		class: 'juice',
-		description: 'We squeezed an apple into a cup!',
-		itemNumber: 2
-	},
-	{
-		name: 'Kiwi Lime Blitz',
-		price: 5,
-		class: 'smoothie',
-		description: 'Savory blend of kiwis, lime juice, and sorbet.',
-		itemNumber: 3
-	},
-	{
-		name: 'Mango Guava Jive',
-		price: 6,
-		class: 'smoothie',
-		description: 'Put the mango in the guava and what do you get?',
-		itemNumber: 4
-	},
-
-	{	name: 'Pomegranate Passion',
-		price: 5,
-		class: 'smoothie',
-		description: 'A passionate combination of pomegranate and pineapple.',
-		itemNumber: 5
-	},
-
-	{
-		name: 'Groovey Green Goddess ',
-		price: 4,
-		class: 'juice',
-		description: 'Get your groove back with natures finest greens.',
-		itemNumber: 6
-	},
-
-	{
-		name: 'Pink Lady',
-		price: 4,
-		class: 'juice',
-		description: 'Put some pink in your cheeks with the sweetest pink grapefruit.',
-		itemNumber: 7
-	},
-
-	{
-		name: 'Jungle Juice',
-		price: 6,
-		class: 'juice',
-		description: 'The purest juice from spinach and tropical fruits',
-		itemNumber: 8
-	},
-
-	{
-		name: 'Pineapple Pleasure',
-		price: 5,
-		class: 'smoothie',
-		description: 'If pineapple pleases you then this is the smoothie for you.',
-		itemNumber: 9
-	},
-
-	{
-		name: 'Pineapple Juice',
-		price: 4,
-		class: 'juice',
-		description: 'The crazy crash of juice from delicious pineapple.',
-		itemNumber: 10
-	},
-
-	{
-		name: 'Happy Monday',
-		price: 7,
-		class: 'juice',
-		description: 'Can make anyday of the week happy.',
-		itemNumber: 11
-	},
-
-	{
-		name: ' Berry Carrot Dream',
-		price: 4,
-		class: 'juice',
-		description: 'The purest juice from delicious carrots.',
-		itemNumber: 12
-	}
-
-
-
+    {
+        name: 'Grape Juice',
+        price: 4,
+        class: 'Juice',
+        description: 'The purest juice from delicious grapes.',
+        itemNumber: 1
+    },
+    {
+        name: 'Apple Juice',
+        price: 3,
+        class: 'Juice',
+        description: 'We squeezed an apple into a cup!',
+        itemNumber: 2
+    },
+    {
+        name: 'Kiwi Lime Blitz',
+        price: 5,
+        class: 'Smoothie',
+        description: 'Savory blend of kiwis, lime juice, and sorbet.',
+        itemNumber: 3
+    },
+    {
+        name: 'Mango Guava Jive',
+        price: 6,
+        class: 'Smoothie',
+        description: 'Put the mango in the guava and what do you get?',
+        itemNumber: 4
+    },
+    {   name: 'Pomegranate Passion',
+        price: 5,
+        class: 'Smoothie',
+        description: 'A passionate combination of pomegranate and pineapple.',
+        itemNumber: 5
+    },
+    {
+        name: 'Groovey Green Goddess ',
+        price: 4,
+        class: 'Juice',
+        description: 'Get your groove back with natures finest greens.',
+        itemNumber: 6
+    },
+    {
+        name: 'Pink Lady',
+        price: 4,
+        class: 'Juice',
+        description: 'Put some pink in your cheeks with the sweetest pink grapefruit.',
+        itemNumber: 7
+    },
+    {
+        name: 'Jungle Juice',
+        price: 6,
+        class: 'Juice',
+        description: 'The purest juice from spinach and tropical fruits',
+        itemNumber: 8
+    },
+    {
+        name: 'Pineapple Pleasure',
+        price: 5,
+        class: 'Smoothie',
+        description: 'If pineapple pleases you then this is the smoothie for you.',
+        itemNumber: 9
+    },
+    {
+        name: 'Pineapple Juice',
+        price: 4,
+        class: 'Juice',
+        description: 'The crazy crash of juice from delicious pineapple.',
+        itemNumber: 10
+    },
+    {
+        name: 'Happy Monday',
+        price: 7,
+        class: 'Juice',
+        description: 'Can make anyday of the week happy.',
+        itemNumber: 11
+    },
+    {
+        name: ' Berry Carrot Dream',
+        price: 4,
+        class: 'Juice',
+        description: 'The purest juice from delicious carrots.',
+        itemNumber: 12
+    }
+];
 
 var shoppingCart = []; //Initializing empty shopping cart array
 var numberOfItemsInCart = 0; //Initializing running total of items in cart
@@ -109,6 +99,7 @@ var cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment page
 
 
 //This function finds the info of each object, creates a container, fills it, and places it in the DOM.
+
 function printItemToShopPage(item) {//Updated all "var" declarations to "let", since this code is re-looped (we don't need to constantly re-declare the variables)
 	let itemContainer = $('<div></div>');//Creates Container
 	let namePTag = $('<p>'+item.name+'</p>');//Identifies Name
