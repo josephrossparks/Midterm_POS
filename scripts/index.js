@@ -102,9 +102,9 @@ var cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment page
 
 function printItemToShopPage(item) {//Updated all "var" declarations to "let", since this code is re-looped (we don't need to constantly re-declare the variables)
 	let itemContainer = $('<div></div>');//Creates Container
-	let namePTag = $('<p>'+item.name+'</p>');//Identifies Name
-	let pricePTag = $('<p>'+item.price+'</p>');//Identifies Price
-	let classPTag = $('<p>'+item.class+'</p><');//Identifies Class
+	let namePTag = $('<h4>'+item.name+'</h4>');//Identifies Name
+	let pricePTag = $('<p><b>'+item.price+'</b></p>');//Identifies Price
+	let classPTag = $('<p>'+item.class+'</p>');//Identifies Class
 	let descriptionPTag = $('<p>'+item.description+'</p>');//Identifies Description
 	
 	let itemContainerId = 'item'+item.itemNumber;//Identifies Item Number
@@ -156,7 +156,7 @@ $("#viewCartButton").on("click", checkoutPage);//Upon clicking the view cart / c
 
 function checkoutPage() {
 	
-	$(".checkoutPage").css("display", "block");//Display checkoutPage DIV (defaulted to display: none)
+	$("#checkoutContainer").css("display", "block");//Display checkoutPage DIV (defaulted to display: none)
 	//NOTE: Presumably here we will want to add super-cool transition functionality.
 	listItems(shoppingCart); //Run the list items function on the current shopping cart array, adding them to the checkout page
 
@@ -191,7 +191,6 @@ function listItems(cartObject) {
 	let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal + "</p>");//Create grand total HTML
 
 	$("#shoppingCartTotals").append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
-
 }
 
 })();

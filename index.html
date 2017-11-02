@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 
   </head>
-    <title>Guava Lava Smooties</title>
+    <title>Guava Lava Smoothies</title>
   </head>
 
   <body>
@@ -20,14 +20,26 @@
       <span id="viewCartButton">View Cart</span>
     </div>
 
-    <div id="checkoutPage">
-      <div id="shoppingCart"></div>
-      <div id="shoppingCartTotals"></div>
-      <div id="shoppingCartButtons">
-        <input type="button" id="returnToShopPage" value="Continue Shopping" />
-        <input type="button" id="goToPaymentPage" value="Make Payment" />
-    </div>
-    </div>
+    <div id="checkoutContainer"><!--Start of Checkout Container Modal-->
+      
+      <div id="cartPage"> <!--Cart Screen-->
+        <div id="shoppingCart"></div>
+        <div id="shoppingCartTotals"></div>
+        <div id="shoppingCartButtons">
+          <input type="button" id="returnToShopPage" value="Continue Shopping" />
+          <input type="button" id="goToPaymentPage" value="Make Payment" />
+        </div>
+      </div>
+
+      <div id="cashOrCredit"></div>
+
+      <div id="cashTransaction"></div>
+
+      <div id="creditTransaction"></div>
+
+      <div id="receiptDisplay"></div>
+
+    </div> <!--End of checkoutContainter-->
 
   	<script src="scripts/jquery-3.2.1.js"></script>
     <script src="scripts/index.js"></script>
