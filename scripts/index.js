@@ -103,7 +103,7 @@ masterItemList.forEach(function(item){
 function printItemToShopPage(item) {//Updated all "var" declarations to "let", since this code is re-looped (we don't need to constantly re-declare the variables)
 	let itemContainer = $('<div></div>');//Creates Container
 	let namePTag = $('<h4>'+item.name+'</h4>');//Identifies Name
-	let pricePTag = $('<p><b>'+item.price+'</b></p>');//Identifies Price
+	let pricePTag = $('<p>$'+item.price+'</p>');//Identifies Price
 	let classPTag = $('<p>'+item.class+'</p>');//Identifies Class
 	let descriptionPTag = $('<p>'+item.description+'</p>');//Identifies Description
 	
@@ -224,10 +224,9 @@ function listItems(cartObject) {
 	cartObject.forEach(function(item) {
 
 		let lineItemContainer = $('<div></div>');//Creates Container
-		let lineItemPTag = $('<p>'+item.name+'</p>');//List item added
-		let lineItemPricePTag = $('<p>$'+item.price+'</p>');//Price of added item
+		let lineItemPTag = $('<p>$'+ item.price+ ' - '+item.name+'</p>');//Price of added item
 
-		lineItemContainer.append(lineItemPTag).append(lineItemPricePTag);//Add item and price to container
+		lineItemContainer.append(lineItemPTag);//Add item and price to container
 
 		$("#shoppingCart").append(lineItemContainer);//place item container in the DOM
 

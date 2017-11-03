@@ -11,31 +11,34 @@
   </head>
 
   <body>
-
+    <h1>Select Your Items</h1>
     <div id="shopPage"></div>
 
-    <div id="cartFooter">
-      <span id="cartIcon">Cart</span>
-      <span id="displayItemTotal">$0.00</span>
-      <span id="viewCartButton">View Cart</span>
+    <div id="cartFooterContainer">
+      <div id="cartFooter">
+        <img src="assets/new_cart_icon.png" alt="Shopping Cart Icon" height="30" width="30">
+        <span id="displayItemTotal">$0.00</span>
+        <span id="viewCartButton">View Cart</span>
+      </div>
     </div>
 
     <div id="checkoutContainer"><!--Start of Checkout Container Modal-->
       
       <div id="cartPage"> <!--Cart Screen-->
+        <h3>Cart Details</h3>
         <div id="shoppingCart"></div>
         <div id="shoppingCartTotals"></div>
         <div id="shoppingCartButtons">
-          <input type="button" id="returnToShopPage" value="Continue Shopping" />
-          <input type="button" id="goToPaymentPage" value="Make Payment" />
+          <button id="returnToShopPage">Continue Shopping</button>
+          <button id="goToPaymentPage">Checkout</button>
         </div>
       </div>
 
 
       <div id="cashOrCredit">
-        <h3 id="selectCash">Cash</h3>
-        <p>or</p>
-        <h3 id="selectCard">Card</h3>
+        <h1 id="selectCash">Cash</h1>
+        <p>- or -</p>
+        <h1 id="selectCard">Card</h1>
       </div>
 
 
@@ -49,7 +52,7 @@
       </div>
 
 
-      <div id="creditTransaction">
+      <div id="cardTransaction">
         <h3>Enter Card Details</h3>
         <input type="text" id="cardNumber" placeholder="00000000000000000">
         <input type="text" id="cardExpiration" placeholder="MMYY">
