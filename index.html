@@ -11,6 +11,7 @@
   </head>
 
   <body>
+
     <h1>Select Your Items</h1>
     <div id="shopPage"></div>
 
@@ -36,17 +37,18 @@
 
 
       <div id="cashOrCredit">
-        <h3 id="selectCash">Cash</h3>
+        <h3>How would you like to pay?</h3>
+        <h1 id="selectCash">Cash</h1>
         <p>or</p>
-        <h3 id="selectCard">Card</h3>
+        <h1 id="selectCard">Card</h1>
         <!-- Possible back button would go here. -->
       </div>
 
 
       <div id="cashTransaction">
         <h3>Enter Cash Recieved</h3>
-
-        <input type="text" id="cashReceived" placeholder="$0.00">
+        <p>Hit enter to calculate change:</p>
+        <input type="text" id="cashReceived" placeholder="0.00">
         <button id="submitCashAmount">Enter</button>
         <div id="displayChangeAmount"></div>
 
@@ -71,7 +73,7 @@
           <div id="receiptTotals"></div>
           <div id="paymentMethod"></div>
         </div>
-        <p id="newOrder">Finish</p>
+        <h4 id="newOrder">Finish</h4>
       </div>
 
     </div> <!--End of checkoutContainter-->
