@@ -138,7 +138,7 @@
 
         // NOTE:  Need to change shoppingCartRunningTotal to include tax; this will result in a better user experience through the payment process.
 
-        numberOfItemsInCart++;//Add one to number of items in cart
+        numberOfItemsInCart++;//Add one to number of items in cart; this can (should?) be displayed next to the cart icon.
         shoppingCartRunningTotal = shoppingCartRunningTotal + itemAddedToCart.price;//Add price of selected item to running shopping cart total
         $("#displayItemTotal").text("$" + shoppingCartRunningTotal.toFixed(2));//Update running cart total to the HTML DOM
 
@@ -279,7 +279,7 @@
         } else if (paymentMethod == "card") {
             $("#paymentMethod").html("<p>Payment Method: Credit Card</p>");//If the payment method was a credit card, print card payment to the HTML DOM.
         } else {
-            $("#paymentMethod").html("<p>Payment Method: Unknown</p>");//If paymentMethod was anything else, print unknown payment.  This should never happen.
+            $("#paymentMethod").html("<p>Payment Method: Other</p>");//If paymentMethod was anything else, print other payment.  This should never happen.
         }
 
     }
