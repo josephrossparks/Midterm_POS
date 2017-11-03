@@ -185,7 +185,7 @@
         $(listArea).html("");//If there is any existing HTML in the item list area, remove it.
         $(totalsArea).html("");//If there is any existing HTML in the item totals area, remove it.
 
-        cartObject.forEach(function(item) {
+        cartObject.forEach(function(item) {//Again: we seem to be declaring variables for each iteration.  Also, HTML DOM strings likely do not need to be defined as jQuery objects.
 
             let lineItemContainer = $('<div></div>');//Creates container for item name and price
             let lineItemPTag = $('<p>$' + item.price + ' - ' + item.name + '</p>');//Create HTML for price and description of added item
@@ -250,6 +250,10 @@
 
     $("#verifyCardDetails").on("click", function () {//The user enters credit card information and clicks the button...
 
+        let cardNumber = $("#cardNumber").val();//Acquire user input from card number text box.
+        let cardExpiration = $("#cardExpiration").val();//Acquire user input from card expiration text box.
+        let cardCVV = $("#cardCVV").val();//Acquire user input from card CVV text box.
+
         //This area should include functionality to check whether the card number was entered correct, as well as the expiration date and security code.
 
         //Perhaps add a "fake delay" to this screen and an animated gif of "processing".
@@ -258,35 +262,31 @@
 
         $("#cardTransaction").css("display", "none");//Card transaction "page" goes away.  Transitions pending.
 
-        let cardNumber = $("#cardNumber").val();
-        let cardExpiration = $("#cardExpiration").val();
-        let cardCVV = $("#cardCVV").val();
-
-        showReceipt("card");//Run the show receipt function; pass "card" as payment method.
+        showReceipt("card");//Run the show receipt function; pass "card" as payment method.  It would be kinda cool to also pass the last four digits of the card number.
 
     });
 
     // BUILD FINAL RECEIPT 
 
-    function showReceipt(paymentMethod) {
+    function showReceipt(paymentMethod) {//This function is called when continuing from the cash or card payment pages.
 
         $("#receiptDisplay").css("display", "block");//Display receipt "page"
 
         listItems(shoppingCart, "#receiptItems", "#receiptTotals");//Call the listItems function to print items and prices to the receipt
 
-        if (paymentMethod == "cash") {
-            $("#paymentMethod").html("<p>Payment Method: Cash</p>");
+        if (paymentMethod == "cash") {//Payment method was passed in as a parameter to the function, so...
+            $("#paymentMethod").html("<p>Payment Method: Cash</p>");//If the payment method was cash, print cash payment to the HTML DOM.
         } else if (paymentMethod == "card") {
-            $("#paymentMethod").html("<p>Payment Method: Credit Card</p>");
+            $("#paymentMethod").html("<p>Payment Method: Credit Card</p>");//If the payment method was a credit card, print card payment to the HTML DOM.
         } else {
-            $("#paymentMethod").html("<p>Payment Method: Unknown</p>");   
+            $("#paymentMethod").html("<p>Payment Method: Unknown</p>");//If paymentMethod was anything else, print unknown payment.  This should never happen.
         }
 
     }
 
     // FINISH ORDER AND RESET VARIABLES
 
-    $("#newOrder").on("click", function() {
+    $("#newOrder").on("click", function() {//When the user clicks on the "finish" button after receiving a receipt...
 
         $("#receiptDisplay").css("display", "none");//The receipt "page" goes away.  Transitions pending.
 
@@ -294,11 +294,11 @@
 
         // Need to reset all values for new order.
 
-        shoppingCart = []; //Initializing empty shopping cart array
-        numberOfItemsInCart = 0; //Initializing running total of items in cart
-        shoppingCartRunningTotal = 0; //Initializing shopping cart running dollar total
-        cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment pages
-        $("#displayItemTotal").text("$0.00");
+        shoppingCart = []; //Empty the shopping cart array
+        numberOfItemsInCart = 0; //Set running total of items in cart to zero
+        shoppingCartRunningTotal = 0; //Set shopping cart running dollar total to zero
+        cartGrandTotal = 0;//Reset grand total of purchase
+        $("#displayItemTotal").text("$0.00");//Reset the displayed item total to zero in the HTML DOM
 
     });
 
