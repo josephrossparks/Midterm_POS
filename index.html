@@ -36,9 +36,10 @@
 
 
       <div id="cashOrCredit">
-        <h1 id="selectCash">Cash</h1>
-        <p>- or -</p>
-        <h1 id="selectCard">Card</h1>
+        <h3 id="selectCash">Cash</h3>
+        <p>or</p>
+        <h3 id="selectCard">Card</h3>
+        <!-- Possible back button would go here. -->
       </div>
 
 
@@ -48,7 +49,9 @@
         <input type="text" id="cashReceived" placeholder="$0.00">
         <button id="submitCashAmount">Enter</button>
         <div id="displayChangeAmount"></div>
-        <h4 id="cashToRecipt">Continue</h4>
+
+        <h4 id="cashToReceipt">Continue</h4>
+        <!-- Possible back button would go here. -->
       </div>
 
 
@@ -58,12 +61,17 @@
         <input type="text" id="cardExpiration" placeholder="MMYY">
         <input type="text" id="cardCVV" placeholder="CVV">
         <button id="verifyCardDetails">Pay</button>
+        <!-- Possible back button would go here. -->
       </div>
 
       <div id="receiptDisplay">
         <h3>Thank You!</h3>
-        <div id="transactionReceipt"></div>
-        <span>Finish</span>
+        <div id="transactionReceipt">
+          <div id="receiptItems"></div>
+          <div id="receiptTotals"></div>
+          <div id="paymentMethod"></div>
+        </div>
+        <p id="newOrder">Finish</p>
       </div>
 
     </div> <!--End of checkoutContainter-->
