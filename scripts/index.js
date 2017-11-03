@@ -156,9 +156,11 @@ function checkoutPage() {
 	
     $("#checkoutContainer").css("display", "block");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
 
+    $("#cartPage").css("display", "block");//Display the cart page within the checkout container DIV.  (Defaulted to display: none)
+
     //NOTE: Presumably here we will want to add super-cool transition functionality for the cart page 
 	
-    listItems(shoppingCart); //Run the list items function on the current shopping cart array, adding them to the checkout page
+    listItems(shoppingCart, "#shoppingCart", "#shoppingCartTotals"); //Run the list items function on the current shopping cart array, adding them to the checkout page
 
     $("#returnToShopPage").on("click", function () {
 
@@ -182,7 +184,9 @@ function checkoutPage() {
 
 $("#selectCash").on("click", function () {
     $("#cashOrCredit").css("display", "none");//Cash or credit "page" goes away.  Transitions pending.
-    $("#cashTransaction").css("display", "block");//Payment sequence continues on to cash payment page.     
+    $("#cashTransaction").css("display", "block");//Payment sequence continues on to cash payment page.
+    $("#displayChangeAmount").html("");//If change display is pre-filled out in the HTML DOM, clear it.
+    $("#cashReceived").val("");
 });
 
 $("#selectCard").on("click", function () {
@@ -195,6 +199,7 @@ $("#submitCashAmount").on("click", function () {
 
     let totalCashReceived = $("#cashReceived").val();
     let changeAmount = totalCashReceived - cartGrandTotal;
+    $("#displayChangeAmount").html("");
 
     // Add functionality which verifies that the total cash entered is at least equal to the sub-total.
 
@@ -212,24 +217,82 @@ $("#submitCashAmount").on("click", function () {
 
     $("#displayChangeAmount").append(cashReceivedPTag).append(cartGrandTotalPTag).append(changeAmountPTag);
 
+    $("#cashToReceipt").on("click", function () {
+        $("#cashTransaction").css("display", "none");//Cash transaction "page" goes away.  Transitions pending.
+        showReceipt("cash");//Run the show receipt function; pass "cash" as payment method.
+    });
+
+});
+
+$("#verifyCardDetails").on("click", function () {
+
+    //This area should include functionality to check whether the card number was entered correct, as well as the expiration date and security code.
+
+    // Add a "fake delay" to this screen.  Also an animated gif of "processing".
+
+    // The following items will need to be changed once the above has been ironed out.
+
+    $("#cardTransaction").css("display", "none");//Card transaction "page" goes away.  Transitions pending.
+
+    let cardNumber = $("#cardNumber").val();
+    let cardExpiration = $("#cardExpiration").val();
+    let cardCVV = $("#cardCVV").val();
+
+    showReceipt("card");//Run the show receipt function; pass "card" as payment method.
+
+});
+
+
+function showReceipt(paymentMethod) {
+
+    $("#receiptDisplay").css("display", "block");//Display receipt "page"
+
+    listItems(shoppingCart, "#receiptItems", "#receiptTotals");//Call the listItems function to print items and prices to the receipt
+
+    if (paymentMethod == "cash") {
+        $("#paymentMethod").html("<p>Payment Method: Cash</p>");
+    } else if (paymentMethod == "card") {
+        $("#paymentMethod").html("<p>Payment Method: Credit Card</p>");
+    } else {
+        $("#paymentMethod").html("<p>Payment Method: Unknown</p>");   
+    }
+
+}
+
+$("#newOrder").on("click", function() {
+
+    $("#receiptDisplay").css("display", "none");//The receipt "page" goes away.  Transitions pending.
+
+    $("#checkoutContainer").css("display", "none");//The checkout container DIV (which "floats" above the item selection area) goes away.  Transitions pending.
+
+    // Need to reset all values for new order.
+
+    shoppingCart = []; //Initializing empty shopping cart array
+    numberOfItemsInCart = 0; //Initializing running total of items in cart
+    shoppingCartRunningTotal = 0; //Initializing shopping cart running dollar total
+    cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment pages
+    $("#displayItemTotal").text("$0.00");
+
 });
 
 // The following function adds the shopping cart to the checkout page and displays the totals.
 
-function listItems(cartObject) {
+function listItems(cartObject, listArea, totalsArea) {
 
 	var cartSubTotal = 0;
 	const salesTax = .06;
 
+    $(listArea).html("");
+    $(totalsArea).html("");
+
 	cartObject.forEach(function(item) {
 
 		let lineItemContainer = $('<div></div>');//Creates Container
-		let lineItemPTag = $('<p>'+item.name+'</p>');//List item added
-		let lineItemPricePTag = $('<p>$'+item.price+'</p>');//Price of added item
+		let lineItemPTag = $('<p>$' + item.price + ' - ' + item.name + '</p>');//Price of added item (and the item description)
 
-		lineItemContainer.append(lineItemPTag).append(lineItemPricePTag);//Add item and price to container
+		lineItemContainer.append(lineItemPTag);//Add item and price to container
 
-		$("#shoppingCart").append(lineItemContainer);//place item container in the DOM
+		$(listArea).append(lineItemContainer);//place item container in the DOM
 
 		cartSubTotal = cartSubTotal + item.price;//Add to cart sub-total
 
@@ -242,7 +305,7 @@ function listItems(cartObject) {
 	let salesTaxPTag = $("<p>Tax: $" + taxAdded.toFixed(2) + "</p>");//Create sales tax HTML
 	let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal.toFixed(2) + "</p>");//Create grand total HTML
 
-	$("#shoppingCartTotals").append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
+	$(totalsArea).append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
 
 }
 

@@ -36,7 +36,7 @@
         <h3 id="selectCash">Cash</h3>
         <p>or</p>
         <h3 id="selectCard">Card</h3>
-        <p>Back</p>
+        <!-- Possible back button would go here. -->
       </div>
 
 
@@ -46,24 +46,28 @@
         <input type="text" id="cashReceived" placeholder="$0.00">
         <button id="submitCashAmount">Enter</button>
         <div id="displayChangeAmount"></div>
-        <p> Back</p>
-        <h4 id="cashToRecipt">Continue</h4>
+        <h4 id="cashToReceipt">Continue</h4>
+        <!-- Possible back button would go here. -->
       </div>
 
 
-      <div id="creditTransaction">
+      <div id="cardTransaction">
         <h3>Enter Card Details</h3>
         <input type="text" id="cardNumber" placeholder="00000000000000000">
         <input type="text" id="cardExpiration" placeholder="MMYY">
         <input type="text" id="cardCVV" placeholder="CVV">
         <button id="verifyCardDetails">Pay</button>
-        <p>Back</p>
+        <!-- Possible back button would go here. -->
       </div>
 
       <div id="receiptDisplay">
         <h3>Thank You!</h3>
-        <div id="transactionReceipt"></div>
-        <span>Finish</span>
+        <div id="transactionReceipt">
+          <div id="receiptItems"></div>
+          <div id="receiptTotals"></div>
+          <div id="paymentMethod"></div>
+        </div>
+        <p id="newOrder">Finish</p>
       </div>
 
     </div> <!--End of checkoutContainter-->
