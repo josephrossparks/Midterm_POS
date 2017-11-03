@@ -104,7 +104,7 @@
     function printItemToShopPage(item) {//Updated all "var" declarations to "let", since this code is re-looped (we don't need to constantly re-declare the variables)
     	let itemContainer = $('<div></div>');//Creates Container
     	let namePTag = $('<h4>'+item.name+'</h4>');//Identifies Name
-    	let pricePTag = $('<p><b>'+item.price+'</b></p>');//Identifies Price
+    	let pricePTag = $('<p>$'+item.price+'</p>');//Identifies Price
     	let classPTag = $('<p>'+item.class+'</p>');//Identifies Class
     	let descriptionPTag = $('<p>'+item.description+'</p>');//Identifies Description
     	
