@@ -38,10 +38,10 @@
             itemNumber: 5
         },
         {
-            name: 'Groovey Green Goddess ',
+            name: 'Groovy Green Goddess ',
             price: 4,
             class: 'Juice',
-            description: 'Get your groove back with natures finest greens.',
+            description: "Get your groove back with nature's finest greens.",
             itemNumber: 6
         },
         {
@@ -76,11 +76,11 @@
             name: 'Happy Monday',
             price: 7,
             class: 'Juice',
-            description: 'Can make anyday of the week happy.',
+            description: 'Can make any day of the week happy.',
             itemNumber: 11
         },
         {
-            name: ' Berry Carrot Dream',
+            name: 'Berry Carrot Dream',
             price: 4,
             class: 'Juice',
             description: 'The purest juice from delicious carrots.',
@@ -90,64 +90,57 @@
 
     // DEFINE GLOBAL VARIABLES
 
-    var shoppingCart = []; //Initializing empty shopping cart array
-    var numberOfItemsInCart = 0; //Initializing running total of items in cart
-    var shoppingCartRunningTotal = 0; //Initializing shopping cart running dollar total
-    var cartGrandTotal = 0;//Grand total of purchase, to be accessed by payment pages
+    var shoppingCart = []; //Initialize empty shopping cart array
+    var numberOfItemsInCart = 0; //Initialize running total of items in cart
+    var shoppingCartRunningTotal = 0; //Initialize shopping cart running dollar total
+    var cartGrandTotal = 0;//Initialize grand total of purchase, to be accessed by payment pages
 
     // BUILD ITEMS AND ADD TO SHOPPING PAGE
 
-    masterItemList.forEach(function(item){
+    masterItemList.forEach(function(item){//For Each loop; goes through product array and renders to the shopping page.
     	printItemToShopPage(item);
     });
 
-    function printItemToShopPage(item) {//Updated all "var" declarations to "let", since this code is re-looped (we don't need to constantly re-declare the variables)
-    	let itemContainer = $('<div></div>');//Creates Container
-    	let namePTag = $('<h4>'+item.name+'</h4>');//Identifies Name
-    	let pricePTag = $('<p><b>'+item.price+'</b></p>');//Identifies Price
-    	let classPTag = $('<p>'+item.class+'</p>');//Identifies Class
-    	let descriptionPTag = $('<p>'+item.description+'</p>');//Identifies Description
+    function printItemToShopPage(item) {//QUESTION:  Are we constantly re-declaring the variables with each iteration?  Also, is it necessary to encompass strings in a jQuery statement?
+    	let itemContainer = $('<div></div>');//Creates item container
+    	let namePTag = $('<h4>'+item.name+'</h4>');//Creates item name HTML string
+    	let pricePTag = $('<p><b>$'+item.price+'</b></p>');//Creates item price HTML string
+    	let classPTag = $('<p>'+item.class+'</p>');//Creates item class HTML string
+    	let descriptionPTag = $('<p>'+item.description+'</p>');//Creates item description HTML string
     	
-    	let itemContainerId = 'item'+item.itemNumber;//Identifies Item Number
-    	$(itemContainer).attr('id', itemContainerId).attr('class', 'itemContainer');//Assigns number as ID to container
+    	let itemContainerId = 'item'+item.itemNumber;//Builds item container ID from item number (e.g. item1, item2, item3, et cetera)
+    	$(itemContainer).attr('id', itemContainerId).attr('class', 'itemContainer');//Assigns ID to item container
 
     	itemContainer.append(namePTag).append(pricePTag).append(classPTag).append(descriptionPTag);//adds info to container
 
-    	$("#shopPage").append(itemContainer);//puts container in the DOM
+    	$("#shopPage").append(itemContainer);//Places container in the HTML DOM
     }
 
     // ADD ITEM TO SHOPPING CART
 
     $(".itemContainer").on("click", function(event) {
 
-    	var itemSelected = $(this).attr("id");//acquire ID of selected item container
-    	// console.log(itemSelected);
-    	var itemSelectedId = itemSelected.substr(4);//remove first four characters from the itemSelected ("item"), thereby resulting in just the number
-    	// console.log(itemSelectedId);
-    	var addToCart = matchProductId(itemSelectedId);
+    	var itemSelected = $(this).attr("id");//Acquire ID of selected item container
+    	var itemSelectedId = itemSelected.substr(4);//Remove first four characters from the itemSelected ("item"), thereby resulting in just the number
+    	var itemAddedToCart = matchProductId(itemSelectedId);//Run matchProductID function, which will return an item object.  Add this to variable itemAddedToCart.
 
-    	function matchProductId(id) {//Iterate through product list array until itemNumber matches container ID; return this object
+    	function matchProductId(id) {//Iterate through product list array until itemNumber matches container ID; return the item object
         	let len = masterItemList.length;
         	for (let i = 0; i < len; i++) {
             	if (masterItemList[i].itemNumber == id) {
                 	return masterItemList[i];
             	}
         	}
-    	return null;
+    	return null;//If no matching item is found, return null.  This should never happen.
         }
 
-    	shoppingCart.push(addToCart);
+    	shoppingCart.push(itemAddedToCart);//Add selected item object to shopping cart array
 
-    	console.log(shoppingCart);
-
-        // NOTE:  Need to change shoppingCartRunningTotal to include tax.
+        // NOTE:  Need to change shoppingCartRunningTotal to include tax; this will result in a better user experience through the payment process.
 
         numberOfItemsInCart++;//Add one to number of items in cart
-        shoppingCartRunningTotal = shoppingCartRunningTotal + addToCart.price;//Add price of selected item to running shopping cart total
-        $("#displayItemTotal").text("$" + shoppingCartRunningTotal.toFixed(2));
-
-        console.log(numberOfItemsInCart);
-        console.log(shoppingCartRunningTotal);
+        shoppingCartRunningTotal = shoppingCartRunningTotal + itemAddedToCart.price;//Add price of selected item to running shopping cart total
+        $("#displayItemTotal").text("$" + shoppingCartRunningTotal.toFixed(2));//Update running cart total to the HTML DOM
 
     });
 
@@ -155,7 +148,7 @@
 
     $("#viewCartButton").on("click", checkoutPage);//Upon clicking the view cart / checkout icon, launch the checkout page function.
 
-    function checkoutPage() {
+    function checkoutPage() {//NOTE:  Here the function is defined rather than being anonymous.  We need to be consistent and use defined functions or anonymous. 
     	
         $("#checkoutContainer").css("display", "block");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
 
@@ -169,12 +162,9 @@
 
             $("#checkoutContainer").css("display", "none");//Display the checkout containing element, which will house all of the subsequent checkout "pages".  (Defaulted to display: none)
 
-            $("#shoppingCart").html("");
-            $("#shoppingCartTotals").html("");
-
         });
 
-        $("#goToPaymentPage").on("click", function () {
+        $("#goToPaymentPage").on("click", function () {//When user clicks on the go to payment button...
             
             $("#cartPage").css("display", "none");//Cart page goes away.  Transitions pending.
             $("#cashOrCredit").css("display", "block");//Payment sequence continues on to cash or credit page.
@@ -189,20 +179,20 @@
 
     function listItems(cartObject, listArea, totalsArea) {
 
-        var cartSubTotal = 0;
-        const salesTax = .06;
+        var cartSubTotal = 0;//Reset cart subtotal to zero
+        const salesTax = .06;//Initialize and define sales tax
 
-        $(listArea).html("");
-        $(totalsArea).html("");
+        $(listArea).html("");//If there is any existing HTML in the item list area, remove it.
+        $(totalsArea).html("");//If there is any existing HTML in the item totals area, remove it.
 
         cartObject.forEach(function(item) {
 
-            let lineItemContainer = $('<div></div>');//Creates Container
-            let lineItemPTag = $('<p>$' + item.price + ' - ' + item.name + '</p>');//Price of added item (and the item description)
+            let lineItemContainer = $('<div></div>');//Creates container for item name and price
+            let lineItemPTag = $('<p>$' + item.price + ' - ' + item.name + '</p>');//Create HTML for price and description of added item
 
             lineItemContainer.append(lineItemPTag);//Add item and price to container
 
-            $(listArea).append(lineItemContainer);//place item container in the DOM
+            $(listArea).append(lineItemContainer);//place item container in the HTML DOM
 
             cartSubTotal = cartSubTotal + item.price;//Add to cart sub-total
 
@@ -215,49 +205,41 @@
         let salesTaxPTag = $("<p>Tax: $" + taxAdded.toFixed(2) + "</p>");//Create sales tax HTML
         let grandTotalPTag = $("<p>Grand Total: $" + cartGrandTotal.toFixed(2) + "</p>");//Create grand total HTML
 
-        $(totalsArea).append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to shopping cart container
+        $(totalsArea).append(subTotalPTag).append(salesTaxPTag).append(grandTotalPTag);//Add totals to container
 
     }
 
     // CASH OR CREDIT PAYMENT SELECTION
 
-    $("#selectCash").on("click", function () {
+    $("#selectCash").on("click", function () {//When user clicks on "cash"...
         $("#cashOrCredit").css("display", "none");//Cash or credit "page" goes away.  Transitions pending.
         $("#cashTransaction").css("display", "block");//Payment sequence continues on to cash payment page.
         $("#displayChangeAmount").html("");//If change display is pre-filled out in the HTML DOM, clear it.
-        $("#cashReceived").val("");
+        $("#cashReceived").val("");//Clear any lingering HTML DOM elements associated with the cash payment calculations.
     });
 
-    $("#selectCard").on("click", function () {
+    $("#selectCard").on("click", function () {//When user clicks on "card"...
         $("#cashOrCredit").css("display", "none");//Cash or credit "page" goes away.  Transitions pending.
         $("#cardTransaction").css("display", "block");//Payment sequence continues on to card payment page.     
     });
 
     // CASH PAYMENT PROCESSING
 
-    $("#submitCashAmount").on("click", function () {
+    $("#submitCashAmount").on("click", function () {//User enters cash received from customer and clicks the button...
 
-        let totalCashReceived = $("#cashReceived").val();
-        let changeAmount = totalCashReceived - cartGrandTotal;
-        $("#displayChangeAmount").html("");
+        $("#displayChangeAmount").html("");//If the display change area contains existing HTML, remove it.  This allows for multiple attempts at calculating change.
+        let totalCashReceived = $("#cashReceived").val();//Acquire user input from text box
+        let changeAmount = totalCashReceived - cartGrandTotal;//Calculate change
 
-        // Add functionality which verifies that the total cash entered is at least equal to the sub-total.
+        // NOTE:  Need to add functionality which verifies that the total cash entered is at least equal to the sub-total.
 
-        console.log(totalCashReceived);
-        console.log(changeAmount);
+        let cashReceivedPTag = $("<p>Cash Received: $" + totalCashReceived + "</p>");//Build HTML for displaying cash received
+        let cartGrandTotalPTag = $("<p>Total Purchase: $" + cartGrandTotal.toFixed(2) + "</p>");//Build HTML for displaying grand total
+        let changeAmountPTag = $("<p>Change: $" + changeAmount.toFixed(2) + "</p>");//Build HTML for displaying change
 
-        let cashReceivedPTag = $("<p>Cash Received: $" + totalCashReceived + "</p>");
-        let cartGrandTotalPTag = $("<p>Total Purchase: $" + cartGrandTotal.toFixed(2) + "</p>");
-        let changeAmountPTag = $("<p>Change: $" + changeAmount.toFixed(2) + "</p>");
+        $("#displayChangeAmount").append(cashReceivedPTag).append(cartGrandTotalPTag).append(changeAmountPTag);//Add cash transaction info to the HTML DOM
 
-        console.log(totalCashReceived);
-        console.log(cartGrandTotalPTag);
-        console.log(changeAmountPTag);
-
-
-        $("#displayChangeAmount").append(cashReceivedPTag).append(cartGrandTotalPTag).append(changeAmountPTag);
-
-        $("#cashToReceipt").on("click", function () {
+        $("#cashToReceipt").on("click", function () {//When the user clicks on the continue button...
             $("#cashTransaction").css("display", "none");//Cash transaction "page" goes away.  Transitions pending.
             showReceipt("cash");//Run the show receipt function; pass "cash" as payment method.
         });
@@ -266,13 +248,13 @@
 
     // CREDIT CARD PAYMENT PROCESSING
 
-    $("#verifyCardDetails").on("click", function () {
+    $("#verifyCardDetails").on("click", function () {//The user enters credit card information and clicks the button...
 
         //This area should include functionality to check whether the card number was entered correct, as well as the expiration date and security code.
 
-        // Add a "fake delay" to this screen.  Also an animated gif of "processing".
+        //Perhaps add a "fake delay" to this screen and an animated gif of "processing".
 
-        // The following items will need to be changed once the above has been ironed out.
+        // The following script will need to be changed once the above has been ironed out.
 
         $("#cardTransaction").css("display", "none");//Card transaction "page" goes away.  Transitions pending.
 
