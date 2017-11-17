@@ -1,0 +1,23 @@
+{
+  "name": "midterm_pos",
+  "version": "1.0.0",
+  "description": "Smoothie Shop App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephrossparks/Midterm_POS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephrossparks/Midterm_POS/issues"
+  },
+  "homepage": "https://github.com/josephrossparks/Midterm_POS#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pg": "^7.4.0"
+  }
+}

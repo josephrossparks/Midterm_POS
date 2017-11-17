@@ -95,6 +95,21 @@ h1 {
 	max-width: 1000px;
 }
 
+#cartIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	font-weight: bold;
+	width: 30px;
+	height: 30px;
+	background: url(./assets/new_cart_icon.png) no-repeat center;
+}
+
+#cartIcon span {
+	margin-left: 3px;
+	font-size: 1.5em;
+}
 
 #viewCartButton:hover {
 	text-decoration: underline;
