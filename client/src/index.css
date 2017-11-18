@@ -1,0 +1,9 @@
+/*CSS PROPERTY RESET*/
+p, div, body {
+	margin: 0;
+	padding: 0;
+}
+
+p, input, div, form {
+	box-sizing: border-box;
+}
