@@ -8,18 +8,19 @@ const app = express();
 // The line below is used once the client has been built for live use.
 // app.use(express.static('client/build'));
 
-/* Internal memory database test...
+/* Internal memory database test... */
 
 app.get('/api/menuitems', function(req, res) {
 	// res.send("YO");
 	res.send(internalTestDb.menuItems);
 });
 
-*/
+/*
 
 app.use(bodyParser.json());
 
 // The following is the table name we will be using for our app queries.
+
 const tableName = "menu";
 
 app.get('/api/menuitems', (req, res) => {
@@ -56,6 +57,8 @@ app.delete('/api/menuitems', function(req, res) {
 	    res.send('SUCCESS');
     });
 });
+
+*/
 
 var port = process.env.PORT || 5000;
 app.listen(port, function () {
